@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+
+        <title>Country Details</title>
+    </head>
+
+    <body>
+        <header>
+            <div class="jumbotron jumbotron-fluid">
+                <div class="container">
+                    <h1 class="display-4">Country Details</h1>
+                    
+                    <p class="lead">Web scraping from the website <a href="https://www.worldometers.info/coronavirus/" target="_blank">Worldometers.info</a></p>
+                </div>
+            </div>
+        </header>
+
+        <main id="app">
+            <div class="container">
+                <h1 v-if="loading" class="text-center"><i>Loading...</i></h1>
+
+                <div v-if="!loading && country_data">
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-2">
+                                    <div class="m-3">
+                                        <img v-bind:src="country_data.flag" v-bind:alt="country_data.name" class="img-thumbnail">
+    
+                                        <h5 class="text-center mt-2">{{country_data.name}}</h5>
+                                    </div>
+                                </div>
+    
+                                <div class="col-10">
+                                    <ul class="list-group">
+                                        <li class="list-group-item"><b>Cases:</b> {{country_data.cases ? country_data.cases : '0'}}</li>
+    
+                                        <li class="list-group-item"><b>Deaths:</b> {{country_data.deaths ? country_data.deaths : '0'}}</li>
+    
+                                        <li class="list-group-item"><b>Recovered:</b> {{country_data.recovered ? country_data.recovered : '0'}}</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card mb-3" v-for="news in country_data.news">
+                        <div class="card-header">
+                            <h5 class="card-title">{{news.date}}</h5>
+                        </div>
+
+                        <div class="card-body">
+                           <ul>
+                               <li><p class="text-justify">{{news.update}}</p></li>
+                           </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <script src="js/jquery-3.4.1.min.js"></script>
+
+        <script src="js/bootstrap.min.js"></script>
+
+        <script src="js/vue.min.js"></script>
+
+        <script src="src/country.js"></script>
+    </body>
+</html>

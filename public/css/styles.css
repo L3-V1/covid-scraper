@@ -1,0 +1,8 @@
+.country {
+    cursor:pointer;
+    color:blue;
+}
+
+.country:hover {
+    text-decoration: underline;
+}
